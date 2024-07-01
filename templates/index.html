@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Artist Recommendation</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Artist Recommendations</h1>
+            <!--<p>A beginner's approach to NLP</p>-->
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 form-container">
+
+                
+
+                <h2 class="mt-4"><i class="fas fa-search"></i> Check Recommendations Based on your favorite Artist</h2>
+                <form id="search-form" class="mb-4" method="post" action="/process_selection">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="artist-search" name ="artist" onkeyup="showDropdown()" placeholder="Type artist name..." required>
+                    </div>
+
+
+                    <div id="dropdownList" class="dropdown-content">
+                    <!-- Search results will be displayed here -->
+                    </div>
+
+                    <div><button type="submit" class="btn btn-success" id="recommend"><strong>Recommend</strong></button></div>
+                </form>
+                <div id="recommendation" class="recommendation"></div>
+                                <h2><i class="fas fa-music" id = "popular"></i> Popular Artists</h2>
+                <div id="popular-artists" class="artists-list">
+                    {% for artist in artists %}
+                        <a href="{{ artist.spotify_url }}" target="_blank" class="artist">
+                            <div class="artist" data-artist="{{ artist.name }}" data-genre="{{ artist.main_genre }}">
+                                <p class='artist-text'><strong>{{ artist.name }}</strong></p>
+                                <p><strong>Genre:</strong> {{ artist.main_genre }}</p>
+                                <p><img src="{{ artist.image_url }}" alt="{{ artist.name }}"></p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Font Awesome Icons -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+    <script src="static/js/script.js"></script>
+</body>
+
+</html>
