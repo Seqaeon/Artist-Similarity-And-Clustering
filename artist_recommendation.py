@@ -7,7 +7,7 @@ class ArtistRecommendation:
         self.client_id = client_id
         self.client_secret = client_secret
         self.base_url = 'https://api.spotify.com/v1'
-        self.access_token = self.get_access_token()
+        
 
     def get_access_token(self):
         token_url = 'https://accounts.spotify.com/api/token'
@@ -21,6 +21,7 @@ class ArtistRecommendation:
         return response.json().get('access_token')
 
     def autocomplete(self, artist_name):
+        self.access_token = self.get_access_token()
         search_url = f'{self.base_url}/search'
         headers = {'Authorization': f'Bearer {self.access_token}'}
         params = {'q': artist_name, 'type': 'artist', 'limit': 10}
@@ -34,6 +35,7 @@ class ArtistRecommendation:
         return artists_list
 
     def recommend(self, artist_name):
+        self.access_token = self.get_access_token()
         search_url = f'{self.base_url}/search'
         headers = {'Authorization': f'Bearer {self.access_token}'}
         params = {'q': artist_name, 'type': 'artist', 'limit': 1}
